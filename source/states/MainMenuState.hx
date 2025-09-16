@@ -31,7 +31,7 @@ class MainMenuState extends MusicBeatState
 		'credits'
 	];
 
-	var leftOption:String = #if ACHIEVEMENTS_ALLOWED 'achievements' #else null #end;
+	var leftOption:String = null;
 	var rightOption:String = 'options';
 
 	var magenta:FlxSprite;
@@ -103,17 +103,6 @@ class MainMenuState extends MusicBeatState
 		fnfVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fnfVer);
 		changeItem();
-
-		#if ACHIEVEMENTS_ALLOWED
-		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
-		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18)
-			Achievements.unlock('friday_night_play');
-
-		#if MODS_ALLOWED
-		Achievements.reloadList();
-		#end
-		#end
 
 		#if CHECK_FOR_UPDATES
 		if (showOutdatedWarning && ClientPrefs.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
@@ -301,11 +290,6 @@ class MainMenuState extends MusicBeatState
 						#if MODS_ALLOWED
 						case 'mods':
 							MusicBeatState.switchState(new ModsMenuState());
-						#end
-
-						#if ACHIEVEMENTS_ALLOWED
-						case 'achievements':
-							MusicBeatState.switchState(new AchievementsMenuState());
 						#end
 
 						case 'credits':

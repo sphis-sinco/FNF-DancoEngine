@@ -2426,11 +2426,6 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		#if ACHIEVEMENTS_ALLOWED
-		var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';
-		checkForAchievement([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie' #if BASE_GAME_FILES, 'debugger' #end]);
-		#end
-
 		var ret:Dynamic = callOnScripts('onEndSong', null, true);
 		if(ret != LuaUtils.Function_Stop && !transitioning)
 		{
@@ -2855,10 +2850,6 @@ class PlayState extends MusicBeatState
 
 			if (!holdArray.contains(true) || endingSong)
 				playerDance();
-
-			#if ACHIEVEMENTS_ALLOWED
-			else checkForAchievement(['oversinging']);
-			#end
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
@@ -3520,59 +3511,7 @@ class PlayState extends MusicBeatState
 		setOnScripts('totalNotesHit', totalNotesHit);
 		updateScore(badHit, scoreBop); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce
 	}
-
-	#if ACHIEVEMENTS_ALLOWED
-	private function checkForAchievement(achievesToCheck:Array<String> = null)
-	{
-		if(chartingMode) return;
-
-		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice') || ClientPrefs.getGameplaySetting('botplay'));
-		if(cpuControlled) return;
-
-		for (name in achievesToCheck) {
-			if(!Achievements.exists(name)) continue;
-
-			var unlock:Bool = false;
-			if (name != WeekData.getWeekFileName() + '_nomiss') // common achievements
-			{
-				switch(name)
-				{
-					case 'ur_bad':
-						unlock = (ratingPercent < 0.2 && !practiceMode);
-
-					case 'ur_good':
-						unlock = (ratingPercent >= 1 && !usedPractice);
-
-					case 'oversinging':
-						unlock = (boyfriend.holdTimer >= 10 && !usedPractice);
-
-					case 'hype':
-						unlock = (!boyfriendIdled && !usedPractice);
-
-					case 'two_keys':
-						unlock = (!usedPractice && keysPressed.length <= 2);
-
-					case 'toastie':
-						unlock = (!ClientPrefs.data.cacheOnGPU && !ClientPrefs.data.shaders && ClientPrefs.data.lowQuality && !ClientPrefs.data.antialiasing);
-
-					#if BASE_GAME_FILES
-					case 'debugger':
-						unlock = (songName == 'test' && !usedPractice);
-					#end
-				}
-			}
-			else // any FC achievements, name should be "weekFileName_nomiss", e.g: "week3_nomiss";
-			{
-				if(isStoryMode && campaignMisses + songMisses < 1 && Difficulty.getString().toUpperCase() == 'HARD'
-					&& storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
-					unlock = true;
-			}
-
-			if(unlock) Achievements.unlock(name);
-		}
-	}
-	#end
-
+	
 	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
 	#end
