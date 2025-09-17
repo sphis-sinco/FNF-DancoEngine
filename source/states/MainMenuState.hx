@@ -22,7 +22,7 @@ class MainMenuState extends MusicBeatState
 	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
 	#end
 
-	public static var dancoEngineVersion:String = '1.0.4'; // This is also used for Discord RPC
+	public static var dancoEngineVersion:String = '1.1.0'; // This is also used for Discord RPC
 	public var curSelected:Int = 0;
 	public var curColumn:MainMenuColumn = CENTER;
 
