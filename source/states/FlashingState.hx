@@ -88,5 +88,8 @@ class FlashingState extends MusicBeatState
 		// it's clunky but it works.
 		texts.members[1].alpha = isYes ? 1.0 : 0.6;
 		texts.members[2].alpha = isYes ? 0.6 : 1.0;
+
+		texts.members[1].color = isYes ? FlxColor.YELLOW : FlxColor.WHITE;
+		texts.members[2].color = isYes ? FlxColor.WHITE : FlxColor.YELLOW;
 	}
 }

@@ -1,12 +1,13 @@
 package states;
 
+import psychlua.FunkinLua;
 import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
-import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
-enum MainMenuColumn {
+enum MainMenuColumn
+{
 	LEFT;
 	CENTER;
 	RIGHT;
@@ -14,30 +15,41 @@ enum MainMenuColumn {
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '1.0.4'; // This is also used for Discord RPC
-	public static var curSelected:Int = 0;
-	public static var curColumn:MainMenuColumn = CENTER;
-	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
+	public static var instance:MainMenuState;
+	#if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
 
-	var menuItems:FlxTypedGroup<FlxSprite>;
-	var leftItem:FlxSprite;
-	var rightItem:FlxSprite;
+	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
+	#end
 
-	//Centered/Text options
-	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		'credits'
-	];
+	public static var dancoEngineVersion:String = '1.0.4'; // This is also used for Discord RPC
+	public var curSelected:Int = 0;
+	public var curColumn:MainMenuColumn = CENTER;
 
-	var leftOption:String = null;
-	var rightOption:String = 'options';
+	public var allowMouse:Bool = true; // Turn this off to block mouse movement in menus
 
-	var magenta:FlxSprite;
-	var camFollow:FlxObject;
+	public var menuItems:FlxTypedGroup<FlxSprite>;
+	public var leftItem:FlxSprite;
+	public var rightItem:FlxSprite;
 
-	static var showOutdatedWarning:Bool = true;
+	public var centerOptions:Array<String> = ['story_mode', 'freeplay', #if MODS_ALLOWED 'mods', #end];
+
+	public var leftOption:String = null;
+	public var rightOption:String = 'options';
+
+	public var magenta:FlxSprite;
+	public var camFollow:FlxObject;
+
+	public var showOutdatedWarning:Bool = true;
+
+	public var versionText:FlxText = new FlxText(12, 0, 0, "", 12);
+
+	override function destroy() {
+		super.destroy();
+
+		instance = null;
+	}
+
 	override function create()
 	{
 		super.create();
@@ -79,10 +91,10 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		for (num => option in optionShit)
+		for (num => option in centerOptions)
 		{
 			var item:FlxSprite = createMenuItem(option, 0, (num * 140) + 90);
-			item.y += (4 - optionShit.length) * 70; // Offsets for when you have anything other than 4 items
+			item.y += (4 - centerOptions.length) * 70; // Offsets for when you have anything other than 4 items
 			item.screenCenter(X);
 		}
 
@@ -94,18 +106,27 @@ class MainMenuState extends MusicBeatState
 			rightItem.x -= rightItem.width;
 		}
 
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		psychVer.scrollFactor.set();
-		psychVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(psychVer);
-		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		fnfVer.scrollFactor.set();
-		fnfVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(fnfVer);
+		versionText.text = "Danco Engine (" + dancoEngineVersion + ")\n" + "Danco Engine (1.0.4)\n" + "Friday Night Funkin' (0.2.7/0.2.8)";
+		versionText.scrollFactor.set();
+		versionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionText);
+
+		var extraTexts:String = "";
+		for (script in luaArray)
+		{
+			var scriptReturn = script.call("get_customVersionText", [versionText]);
+			
+			if (scriptReturn != null && scriptReturn != "")
+				extraTexts += "\n" + scriptReturn;
+		}
+
+		versionText.y = FlxG.height - versionText.height - 8;
+
 		changeItem();
 
 		#if CHECK_FOR_UPDATES
-		if (showOutdatedWarning && ClientPrefs.data.checkForUpdates && substates.OutdatedSubState.updateVersion != psychEngineVersion) {
+		if (showOutdatedWarning && ClientPrefs.data.checkForUpdates && substates.OutdatedSubState.updateVersion != dancoEngineVersion)
+		{
 			persistentUpdate = false;
 			showOutdatedWarning = false;
 			openSubState(new substates.OutdatedSubState());
@@ -113,6 +134,7 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		FlxG.camera.follow(camFollow, null, 0.15);
+		instance = this;
 	}
 
 	function createMenuItem(name:String, x:Float, y:Float):FlxSprite
@@ -123,7 +145,7 @@ class MainMenuState extends MusicBeatState
 		menuItem.animation.addByPrefix('selected', '$name selected', 24, true);
 		menuItem.animation.play('idle');
 		menuItem.updateHitbox();
-		
+
 		menuItem.antialiasing = ClientPrefs.data.antialiasing;
 		menuItem.scrollFactor.set();
 		menuItems.add(menuItem);
@@ -133,6 +155,7 @@ class MainMenuState extends MusicBeatState
 	var selectedSomethin:Bool = false;
 
 	var timeNotMoving:Float = 0;
+
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.8)
@@ -147,14 +170,16 @@ class MainMenuState extends MusicBeatState
 				changeItem(1);
 
 			var allowMouse:Bool = allowMouse;
-			if (allowMouse && ((FlxG.mouse.deltaScreenX != 0 && FlxG.mouse.deltaScreenY != 0) || FlxG.mouse.justPressed)) //FlxG.mouse.deltaScreenX/Y checks is more accurate than FlxG.mouse.justMoved
+			if (allowMouse
+				&& ((FlxG.mouse.deltaScreenX != 0 && FlxG.mouse.deltaScreenY != 0)
+					|| FlxG.mouse.justPressed)) // FlxG.mouse.deltaScreenX/Y checks is more accurate than FlxG.mouse.justMoved
 			{
 				allowMouse = false;
 				FlxG.mouse.visible = true;
 				timeNotMoving = 0;
 
 				var selectedItem:FlxSprite;
-				switch(curColumn)
+				switch (curColumn)
 				{
 					case CENTER:
 						selectedItem = menuItems.members[curSelected];
@@ -164,19 +189,19 @@ class MainMenuState extends MusicBeatState
 						selectedItem = rightItem;
 				}
 
-				if(leftItem != null && FlxG.mouse.overlaps(leftItem))
+				if (leftItem != null && FlxG.mouse.overlaps(leftItem))
 				{
 					allowMouse = true;
-					if(selectedItem != leftItem)
+					if (selectedItem != leftItem)
 					{
 						curColumn = LEFT;
 						changeItem();
 					}
 				}
-				else if(rightItem != null && FlxG.mouse.overlaps(rightItem))
+				else if (rightItem != null && FlxG.mouse.overlaps(rightItem))
 				{
 					allowMouse = true;
-					if(selectedItem != rightItem)
+					if (selectedItem != rightItem)
 					{
 						curColumn = RIGHT;
 						changeItem();
@@ -186,12 +211,13 @@ class MainMenuState extends MusicBeatState
 				{
 					var dist:Float = -1;
 					var distItem:Int = -1;
-					for (i in 0...optionShit.length)
+					for (i in 0...centerOptions.length)
 					{
 						var memb:FlxSprite = menuItems.members[i];
-						if(FlxG.mouse.overlaps(memb))
+						if (FlxG.mouse.overlaps(memb))
 						{
-							var distance:Float = Math.sqrt(Math.pow(memb.getGraphicMidpoint().x - FlxG.mouse.screenX, 2) + Math.pow(memb.getGraphicMidpoint().y - FlxG.mouse.screenY, 2));
+							var distance:Float = Math.sqrt(Math.pow(memb.getGraphicMidpoint().x - FlxG.mouse.screenX, 2)
+								+ Math.pow(memb.getGraphicMidpoint().y - FlxG.mouse.screenY, 2));
 							if (dist < 0 || distance < dist)
 							{
 								dist = distance;
@@ -201,7 +227,7 @@ class MainMenuState extends MusicBeatState
 						}
 					}
 
-					if(distItem != -1 && selectedItem != menuItems.members[distItem])
+					if (distItem != -1 && selectedItem != menuItems.members[distItem])
 					{
 						curColumn = CENTER;
 						curSelected = distItem;
@@ -212,32 +238,33 @@ class MainMenuState extends MusicBeatState
 			else
 			{
 				timeNotMoving += elapsed;
-				if(timeNotMoving > 2) FlxG.mouse.visible = false;
+				if (timeNotMoving > 2)
+					FlxG.mouse.visible = false;
 			}
 
-			switch(curColumn)
+			switch (curColumn)
 			{
 				case CENTER:
-					if(controls.UI_LEFT_P && leftOption != null)
+					if (controls.UI_LEFT_P && leftOption != null)
 					{
 						curColumn = LEFT;
 						changeItem();
 					}
-					else if(controls.UI_RIGHT_P && rightOption != null)
+					else if (controls.UI_RIGHT_P && rightOption != null)
 					{
 						curColumn = RIGHT;
 						changeItem();
 					}
 
 				case LEFT:
-					if(controls.UI_RIGHT_P)
+					if (controls.UI_RIGHT_P)
 					{
 						curColumn = CENTER;
 						changeItem();
 					}
 
 				case RIGHT:
-					if(controls.UI_LEFT_P)
+					if (controls.UI_LEFT_P)
 					{
 						curColumn = CENTER;
 						changeItem();
@@ -263,10 +290,10 @@ class MainMenuState extends MusicBeatState
 
 				var item:FlxSprite;
 				var option:String;
-				switch(curColumn)
+				switch (curColumn)
 				{
 					case CENTER:
-						option = optionShit[curSelected];
+						option = centerOptions[curSelected];
 						item = menuItems.members[curSelected];
 
 					case LEFT:
@@ -292,8 +319,6 @@ class MainMenuState extends MusicBeatState
 							MusicBeatState.switchState(new ModsMenuState());
 						#end
 
-						case 'credits':
-							MusicBeatState.switchState(new CreditsState());
 						case 'options':
 							MusicBeatState.switchState(new OptionsState());
 							OptionsState.onPlayState = false;
@@ -313,10 +338,10 @@ class MainMenuState extends MusicBeatState
 							item.visible = true;
 					}
 				});
-				
+
 				for (memb in menuItems)
 				{
-					if(memb == item)
+					if (memb == item)
 						continue;
 
 					FlxTween.tween(memb, {alpha: 0}, 0.4, {ease: FlxEase.quadOut});
@@ -337,8 +362,9 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(change:Int = 0)
 	{
-		if(change != 0) curColumn = CENTER;
-		curSelected = FlxMath.wrap(curSelected + change, 0, optionShit.length - 1);
+		if (change != 0)
+			curColumn = CENTER;
+		curSelected = FlxMath.wrap(curSelected + change, 0, centerOptions.length - 1);
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		for (item in menuItems)
@@ -348,7 +374,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		var selectedItem:FlxSprite;
-		switch(curColumn)
+		switch (curColumn)
 		{
 			case CENTER:
 				selectedItem = menuItems.members[curSelected];
