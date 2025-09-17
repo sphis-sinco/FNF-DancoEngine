@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Sinco_ArgumentSincoMix.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Sinco down _0000" x="4" y="4" width="639" height="687" frameX="-4" frameY="-5" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0001" x="4" y="4" width="639" height="687" frameX="-4" frameY="-5" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0002" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0003" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0004" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0005" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0006" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0007" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0008" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _0009" x="651" y="4" width="630" height="692" frameX="0" frameY="0" frameWidth="643" frameHeight="692"/>
+	<SubTexture name="Sinco down _ Miss0000" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0001" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0002" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0003" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0004" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0005" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0006" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0007" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0008" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco down _ Miss0009" x="1289" y="4" width="577" height="673"/>
+	<SubTexture name="Sinco idle _0000" x="1874" y="4" width="509" height="826" frameX="-31" frameY="0" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0001" x="1874" y="4" width="509" height="826" frameX="-31" frameY="0" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0002" x="2391" y="4" width="505" height="824" frameX="-28" frameY="-2" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0003" x="2391" y="4" width="505" height="824" frameX="-28" frameY="-2" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0004" x="2904" y="4" width="494" height="821" frameX="-19" frameY="-5" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0005" x="3406" y="4" width="494" height="821" frameX="-19" frameY="-5" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0006" x="4" y="838" width="468" height="822" frameX="-7" frameY="-4" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0007" x="4" y="838" width="468" height="822" frameX="-7" frameY="-4" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0008" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0009" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0010" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0011" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0012" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco idle _0013" x="480" y="838" width="448" height="823" frameX="0" frameY="-3" frameWidth="540" frameHeight="826"/>
+	<SubTexture name="Sinco left _0000" x="936" y="838" width="604" height="782" frameX="0" frameY="-7" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0001" x="936" y="838" width="604" height="782" frameX="0" frameY="-7" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0002" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0003" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0004" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0005" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0006" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0007" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0008" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _0009" x="1548" y="838" width="605" height="789" frameX="-4" frameY="0" frameWidth="609" frameHeight="789"/>
+	<SubTexture name="Sinco left _ Miss0000" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0001" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0002" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0003" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0004" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0005" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0006" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0007" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0008" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco left _ Miss0009" x="2161" y="838" width="510" height="696"/>
+	<SubTexture name="Sinco right _0000" x="2679" y="838" width="698" height="1028" frameX="-57" frameY="0" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0001" x="2679" y="838" width="698" height="1028" frameX="-57" frameY="0" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0002" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0003" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0004" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0005" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0006" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0007" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0008" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _0009" x="4" y="1874" width="725" height="1022" frameX="0" frameY="-6" frameWidth="755" frameHeight="1028"/>
+	<SubTexture name="Sinco right _ Miss0000" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0001" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0002" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0003" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0004" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0005" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0006" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0007" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0008" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco right _ Miss0009" x="737" y="1874" width="642" height="963"/>
+	<SubTexture name="Sinco up _0000" x="1387" y="1874" width="610" height="1045"/>
+	<SubTexture name="Sinco up _0001" x="1387" y="1874" width="610" height="1045"/>
+	<SubTexture name="Sinco up _0002" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0003" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0004" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0005" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0006" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0007" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0008" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _0009" x="2005" y="1874" width="583" height="998" frameX="-10" frameY="-47" frameWidth="610" frameHeight="1045"/>
+	<SubTexture name="Sinco up _ Miss0000" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0001" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0002" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0003" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0004" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0005" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0006" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0007" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0008" x="2596" y="1874" width="598" height="1035"/>
+	<SubTexture name="Sinco up _ Miss0009" x="2596" y="1874" width="598" height="1035"/>
+</TextureAtlas>
