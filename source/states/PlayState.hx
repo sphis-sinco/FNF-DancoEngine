@@ -177,7 +177,6 @@ class PlayState extends MusicBeatState
 	public var combo:Int = 0;
 
 	public var healthBar:Bar;
-	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
@@ -478,31 +477,7 @@ class PlayState extends MusicBeatState
 		add(noteGroup);
 
 		Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
-		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
-		timeTxt.visible = updateTime = showTime;
-		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
-		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
-
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
-		timeBar.scrollFactor.set();
-		timeBar.screenCenter(X);
-		timeBar.alpha = 0;
-		timeBar.visible = showTime;
-		uiGroup.add(timeBar);
-		uiGroup.add(timeTxt);
-
 		noteGroup.add(strumLineNotes);
-
-		if(ClientPrefs.data.timeBarType == 'Song Name')
-		{
-			timeTxt.size = 24;
-			timeTxt.y += 3;
-		}
 
 		generateSong();
 
@@ -1153,8 +1128,8 @@ class PlayState extends MusicBeatState
 		}
 
 		var tempScore:String;
-		if(!instakillOnMiss) tempScore = Language.getPhrase('score_text', 'Score: {1} | Misses: {2} | Rating: {3}', [songScore, songMisses, str]);
-		else tempScore = Language.getPhrase('score_text_instakill', 'Score: {1} | Rating: {2}', [songScore, str]);
+		if(!instakillOnMiss) tempScore = Language.getPhrase('score_text', 'Score: {1} | Misses: {2}', [songScore, songMisses]);
+		else tempScore = Language.getPhrase('score_text_instakill', 'Score: {1}', [songScore]);
 		scoreTxt.text = tempScore;
 	}
 
@@ -1256,8 +1231,6 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
@@ -1737,20 +1710,6 @@ class PlayState extends MusicBeatState
 				startSong();
 			else if(!startedCountdown)
 				Conductor.songPosition = -Conductor.crochet * 5 + Conductor.offset;
-		}
-		else if (!paused && updateTime)
-		{
-			var curTime:Float = Math.max(0, Conductor.songPosition - ClientPrefs.data.noteOffset);
-			songPercent = (curTime / songLength);
-
-			var songCalc:Float = (songLength - curTime);
-			if(ClientPrefs.data.timeBarType == 'Time Elapsed') songCalc = curTime;
-
-			var secondsTotal:Int = Math.floor(songCalc / 1000);
-			if(secondsTotal < 0) secondsTotal = 0;
-
-			if(ClientPrefs.data.timeBarType != 'Song Name')
-				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
 		}
 
 		if (camZooming)
@@ -2415,8 +2374,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		timeBar.visible = false;
-		timeTxt.visible = false;
 		canPause = false;
 		endingSong = true;
 		camZooming = false;
@@ -3511,7 +3468,7 @@ class PlayState extends MusicBeatState
 		setOnScripts('totalNotesHit', totalNotesHit);
 		updateScore(badHit, scoreBop); // score will only update after rating is calculated, if it's a badHit, it shouldn't bounce
 	}
-	
+
 	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
 	#end
