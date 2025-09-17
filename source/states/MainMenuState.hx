@@ -106,7 +106,7 @@ class MainMenuState extends MusicBeatState
 			rightItem.x -= rightItem.width;
 		}
 
-		versionText.text = "Danco Engine (" + dancoEngineVersion + ")\n" + "Danco Engine (1.0.4)\n" + "Friday Night Funkin' (0.2.7/0.2.8)";
+		versionText.text = "Danco Engine (" + dancoEngineVersion + ")\n" + "Psych Engine (1.0.4)\n" + "Friday Night Funkin' (0.2.7/0.2.8)";
 		versionText.scrollFactor.set();
 		versionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionText);
