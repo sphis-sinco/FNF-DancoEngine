@@ -90,7 +90,7 @@ class Main extends Sprite
 		#end
 		Mods.loadTopMod();
 
-		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+		FlxG.save.bind('danco', CoolUtil.getSavePath());
 		Highscore.load();
 
 		#if HSCRIPT_ALLOWED

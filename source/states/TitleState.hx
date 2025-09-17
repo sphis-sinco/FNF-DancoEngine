@@ -476,10 +476,12 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['Danco Engine', 'by'], 40);
 				case 4:
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('Sphis', 40);
+					addMoreText('Paul leps', 40);
+					addMoreText('and', 40);
+					addMoreText('Djotta Flow', 40);
 				case 5:
 					deleteCoolText();
 				case 6:
